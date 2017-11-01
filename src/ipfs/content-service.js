@@ -11,11 +11,18 @@ const {
 
 const CHUNK_LENGTH = 262144
 
+// TODO - Refactor add param with the config object
 function ContentService(addr) {
-  const maddr = multiaddr(addr)
-  this.host = maddr.nodeAddress().address
-  this.port = maddr.nodeAddress().port
-  this.files = FilesAPI(addr)
+  this.host = 'ipfs.infura.io'
+  this.port = '5001'
+  this.files = FilesAPI({
+    'host': 'ipfs.infura.io',
+    'port': '5001',
+    'protocol': 'https',
+    'user-agent': '/node-ipfs-api/14.3.7/',
+    'content-type': 'multipart/form-data; boundary=7ewtcwll2tk',
+    'api-path': '/api/v0/'
+  })
 }
 
 ContentService.prototype.pathToURL = function (path) {
