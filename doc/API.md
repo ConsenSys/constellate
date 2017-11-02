@@ -207,7 +207,7 @@ metadataService.put(err => {
 
 #### new ContentService
 ```js
-const ContentService = require('./src/content-service/browser')
+const ContentService = require('./src/content-service')
 
 const params = {
   name: 'ipfs',

@@ -1,7 +1,6 @@
 'use strict'
 
 const FilesAPI = require('ipfs-api/src/files')
-const multiaddr = require('multiaddr')
 const UnixFS = require('ipfs-unixfs')
 
 const {
@@ -12,7 +11,7 @@ const {
 const CHUNK_LENGTH = 262144
 
 // TODO - Refactor add param with the config object
-function ContentService(addr) {
+function ContentService(params) {
   this.host = 'ipfs.infura.io'
   this.port = '5001'
   this.files = FilesAPI({

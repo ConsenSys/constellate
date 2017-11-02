@@ -9,8 +9,8 @@ const {
   MetadataService
 } = require('../src/ipfs')
 
-const contentService = new ContentService(endpoint)
-const metadataService = new MetadataService(endpoint)
+const contentService = new ContentService()
+const metadataService = new MetadataService()
 
 describe('IPFS', () => {
   test.contentService(contentService)

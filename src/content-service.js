@@ -1,25 +1,26 @@
 'use strict'
 
 const aes = require('aes-js')
-const IpfsContentService = require('../ipfs/content-service')
+const IpfsContentService = require('./ipfs/content-service')
 
 const {
   encryptFiles,
   scrypt2x
-} = require('../crypto')
+} = require('./crypto')
 
 const {
   errInvalidPassword,
   errUnexpectedHash,
   errUnexpectedType,
   errUnsupportedService
-} = require('../errors')
+} = require('./errors')
 
 const {
   AudioObject,
   ImageObject,
   VideoObject
 } = require('js-coalaip/src/core')
+
 
 function ContentService({ name, path }) {
   if (name === 'ipfs') {

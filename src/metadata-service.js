@@ -10,7 +10,7 @@ const {
   errUnsupportedService
 } = require('./errors')
 
-function MetadataService ({ name, path }) {
+function MetadataService({ name, path }) {
   if (name === 'bigchaindb') {
     // ...
   } else if (name === 'ipfs') {
