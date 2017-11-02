@@ -7,6 +7,7 @@
   "scripts": {
     "build": "webpack --env build",
     "bundle": "browserify browser/content-service.js > browser/bundle.js",
+    "content-test": "http-server ./browser/ -p 3000",
     "lint": "./node_modules/.bin/eslint src",
     "test": "./node_modules/.bin/mocha --reporter spec"
   },
@@ -35,6 +36,7 @@
     "browserify": "^14.4.0",
     "eslint": "^4.7.1",
     "eslint-loader": "^1.9.0",
+    "http-server": "^0.10.0",
     "webpack": "^3.8.1"
   }
 }
