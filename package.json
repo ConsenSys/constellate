@@ -1,10 +1,11 @@
 {
   "name": "constellate",
-  "main": "src/index.js",
+  "main": "lib/constellate.min.js",
   "version": "0.0.2",
   "author": "Zachary Balder",
   "license": "MIT",
   "scripts": {
+    "build": "webpack --env build",
     "bundle": "browserify browser/content-service.js > browser/bundle.js",
     "lint": "./node_modules/.bin/eslint src",
     "test": "./node_modules/.bin/mocha --reporter spec"
@@ -28,7 +29,12 @@
     "tweetnacl": "^1.0.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
     "browserify": "^14.4.0",
-    "eslint": "^4.7.1"
+    "eslint": "^4.7.1",
+    "eslint-loader": "^1.9.0",
+    "webpack": "^3.8.1"
   }
 }
