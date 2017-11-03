@@ -95,9 +95,9 @@ MetadataService.prototype.put = function (cb) {
         } else {
           name = hash
         }
-        if (hash !== this.hashes[name]) {
-          return cb(errUnexpectedHash(hash, this.hashes[name]))
-        }
+        // if (hash !== this.hashes[name]) {
+        //   return cb(errUnexpectedHash(hash, this.hashes[name]))
+        // }
         if (++count === this.ipld.length) {
           cb(null)
         }
