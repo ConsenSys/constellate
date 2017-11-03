@@ -75,7 +75,7 @@ ContentService.prototype.get = function (path, password, cb) {
 }
 
 ContentService.prototype.process = function (files, cb) {
-  const metadata = []
+  this.metadata = []
   let count = 0
   files.forEach((file, i) => {
     this.service.hash(file.content, (err, hash) => {
@@ -85,19 +85,19 @@ ContentService.prototype.process = function (files, cb) {
       this.hashes[file.name] = hash
       const type = file.type.split('/')[0]
       if (type === 'audio') {
-        metadata[i] = new AudioObject()
+        this.metadata[i] = new AudioObject()
       } else if (type === 'image') {
-        metadata[i] = new ImageObject()
+        this.metadata[i] = new ImageObject()
       } else if (type === 'video') {
-        metadata[i] = new VideoObject()
+        this.metadata[i] = new VideoObject()
       } else {
         return cb(errUnexpectedType(type, 'audio|image|video'))
       }
-      metadata[i].setContentUrl(this.service.pathToURL(hash))
-      metadata[i].setEncodingFormat(file.type)
-      metadata[i].setName(file.name)
+      this.metadata[i].setContentUrl(this.service.pathToURL(hash))
+      this.metadata[i].setEncodingFormat(file.type)
+      this.metadata[i].setName(file.name)
       if (++count === files.length) {
-        cb(null, metadata)
+        cb(null, this.metadata)
       }
     })
   })
@@ -124,6 +124,8 @@ ContentService.prototype.import = function (files, password, cb) {
         return cb(err)
       }
       this.files = files
+      // metadata.setContentUrl(this.service.pathToURL(hash))
+      // metadata[i].setEncodingFormat(file.type)
       cb(null, metadata)
     })
   }
@@ -136,6 +138,7 @@ ContentService.prototype.put = function (cb) {
   const contents = this.files.map(file => file.content)
   let file
   this.service.put(contents, (err, results) => {
+    console.log(results)
     if (err) {
       return cb(err)
     }
@@ -145,8 +148,11 @@ ContentService.prototype.put = function (cb) {
       // if (results[i] !== this.hashes[file.name]) {
       //   return cb(errUnexpectedHash(results[i], this.hashes[file.name]))
       // }
+        this.metadata[i].setContentUrl(this.service.pathToURL(results[i]))
+        this.metadata[i].setEncodingFormat(file.type)
+        this.metadata[i].setName(file.name)
     }
-    cb(null)
+    cb(this.metadata)
   })
 }
 

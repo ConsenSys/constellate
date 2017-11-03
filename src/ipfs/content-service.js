@@ -26,7 +26,7 @@ function ContentService(addr) {
 }
 
 ContentService.prototype.pathToURL = function (path) {
-  return `http://${this.host}:${this.port}/api/v0/get?arg=` + path
+  return `https://${this.host}:${this.port}/api/v0/get?arg=` + path
 }
 
 ContentService.prototype.put = function (contents, cb) {
