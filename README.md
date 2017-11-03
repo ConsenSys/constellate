@@ -2,71 +2,20 @@
 
 Beware of 🔥🔥
 
-Persist and retrieve linked metadata with media content. The two main components are...
+### Install
 
-`ContentService` - Responsible for persisting and retrieving media content from the storage layer.
+Clone the repo and `npm install`.
 
-`MetadataService` - Responsible for persisting and retrieving linked metadata (e.g. [IPLD](https://ipld.io/)) from the database/storage layer.
+### Usage
 
-#### Get Started
-```js
-const ContentService = require('./src/content-service')
+#### Browser
 
-// Running ipfs daemon
+`npm run bundle` if it's the first time, this should bundle dependencies with Browserify.
 
-const params = {
-  name: 'ipfs',
-  path: '/ip4/127.0.0.1/tcp/5001'
-}
+`npm start` should start the express app.
 
-const contentService = new ContentService(params)
+Then go to `localhost:8888/{project|query}.html` in your browser.
 
-const file = {
-  content:  <Buffer ...>,
-  name: 'track.mp3',
-  type: 'audio/mp3'
-}
+#### Tests
 
-// Import media
-
-contentService.import([file, ...], (err, mediaObjects) => {
-  if (err) {
-    throw err
-  }
-  console.log(contentService.hashes)
-
-  // {
-  //   "track.mp3": "QmSRna7zhvyzxyqN7bSHA4JbJMzWSMjkApJWaMzxPQ7LEN",
-  //   ...
-  // }
-
-  console.log(mediaObjects[0].data())
-
-  // {
-  //   "@context": "http://schema.org",
-  //   "@type":  "AudioObject",
-  //   "contentUrl": "http://127.0.0.1:5001/api/v0/get?arg=QmSRna7zhvyzxyqN7bSHA4JbJMzWSMjkApJWaMzxPQ7LEN",
-  //   "encodingFormat": "audio/mp3",
-  //   "name": "track.mp3"
-  // },
-
-  // Persist to storage layer
-  contentService.put(err => {
-    if (err) {
-      throw err
-    }
-
-    // Retrieve media
-    contentService.get(file.name, (err, buf) => {
-      if (err) {
-        throw error
-      }
-      console.log(buf)
-
-      // <Buffer ...>
-    })
-  })
-})
-```
-
-Check out the [API doc](https://github.com/zbo14/constellate/tree/master/doc/API.md) and [tests](https://github.com/zbo14/constellate/tree/master/test/fixtures/test.js) for more examples.
+TODO
