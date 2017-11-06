@@ -86,7 +86,7 @@ MetadataService.prototype.pathToCID = path => {
 }
 
 MetadataService.prototype.pathToURL = function (path) {
-  return `http://${this.host}:${this.port}/api/v0/dag/get?arg=` + path
+  return `https://${this.host}:${this.port}/api/v0/dag/get?arg=` + path
 }
 
 MetadataService.prototype.put = function (obj, cb) {

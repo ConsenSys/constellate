@@ -1,8 +1,8 @@
 'use strict'
 
 const IpfsMetadataService = require('./ipfs/metadata-service')
-const isSubType = require('js-coalaip/src/util').isSubType
-const Person = require('js-coalaip/src/core').Person
+const isSubType = require('js-coalaip/build/util').isSubType
+const Person = require('js-coalaip/build/core').Person
 const Resolver = require('./resolver')
 
 const {
@@ -95,9 +95,9 @@ MetadataService.prototype.put = function (cb) {
         } else {
           name = hash
         }
-        // if (hash !== this.hashes[name]) {
-        //   return cb(errUnexpectedHash(hash, this.hashes[name]))
-        // }
+        if (hash !== this.hashes[name]) {
+          return cb(errUnexpectedHash(hash, this.hashes[name]))
+        }
         if (++count === this.ipld.length) {
           cb(null)
         }

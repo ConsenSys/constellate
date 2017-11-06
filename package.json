@@ -22,7 +22,7 @@
     "ipfs-block": "^0.6.0",
     "ipfs-unixfs": "^0.1.12",
     "ipld-dag-pb": "^0.11.0",
-    "js-coalaip": "git+https://github.com/COALAIP/js-coalaip.git",
+    "js-coalaip": "git+https://github.com/COALAIP/js-coalaip.git#feat/build",
     "mocha": "^3.5.0",
     "multiaddr": "^3.0.1",
     "multihashes": "^0.4.9",
