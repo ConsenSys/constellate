@@ -5,6 +5,8 @@ const Person = require('js-coalaip/build/core').Person;
 const MusicGroup = require('js-coalaip/build/music').MusicGroup;
 const ContentServiceBrowser = require('../lib/constellate.min').ContentServiceBrowser
 const MetadataService = require('../lib/constellate.min').MetadataService
+// const ContentServiceBrowser = require('../src/content-service/browser')
+// const MetadataService = require('../src/metadata-service')
 const endpoint = require('../test/fixtures/endpoints').ipfs
 
 const contentService = new ContentServiceBrowser({
@@ -37,9 +39,11 @@ importBtn.addEventListener('click', async () => {
     const group = new MusicGroup();
     group.setName('The Stellars');
     group.setDescription('The Stellars go galactic in 2018');
+    console.log('imageFiles[0]', imageFiles[0])
     group.addImage(imageFiles[0]); // do not connect yet, as images may change often
 
     group.addMember(person);
+    console.log('group.subInstances()', group.subInstances())
 
     await importAndPutMetadata(group.subInstances())
     // .catch(console.log('Error Importing and Putting Music Group Metadata'));
