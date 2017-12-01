@@ -19,7 +19,7 @@ const {
   AudioObject,
   ImageObject,
   VideoObject
-} = require('js-coalaip/build/core')
+} = require('js-coalaip/lib/core')
 
 function ContentService({ name, path }) {
   if (name === 'ipfs') {

@@ -1,8 +1,8 @@
 'use strict'
 
 const IpfsMetadataService = require('./ipfs/metadata-service')
-const isSubType = require('js-coalaip/build/util').isSubType
-const Person = require('js-coalaip/build/core').Person
+const isSubType = require('js-coalaip/lib/util').isSubType
+const Person = require('js-coalaip/lib/core').Person
 const Resolver = require('./resolver')
 
 const {

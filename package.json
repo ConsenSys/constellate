@@ -7,7 +7,6 @@
   "scripts": {
     "build": "webpack --env build",
     "bundle": "browserify browser/content-service.js > browser/bundle.js",
-    "content-test": "http-server ./browser/ -p 3000",
     "lint": "./node_modules/.bin/eslint src",
     "test": "./node_modules/.bin/mocha --reporter spec"
   },
@@ -22,7 +21,7 @@
     "ipfs-block": "^0.6.0",
     "ipfs-unixfs": "^0.1.12",
     "ipld-dag-pb": "^0.11.0",
-    "js-coalaip": "git+https://github.com/COALAIP/js-coalaip.git#feat/build",
+    "js-coalaip": "git+https://github.com/COALAIP/js-coalaip.git",
     "mocha": "^3.5.0",
     "multiaddr": "^3.0.1",
     "multihashes": "^0.4.9",
