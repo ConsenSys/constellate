@@ -17,11 +17,18 @@ const isValidCID = cid => {
          cid.version === dagCBOR.version
 }
 
+// TODO - Refactor add param with the config object
 function MetadataService(addr) {
-  const maddr = multiaddr(addr)
-  this.blocks = new BlockAPI(addr)
-  this.host = maddr.nodeAddress().address
-  this.port = maddr.nodeAddress().port
+  this.host = 'ipfs.infura.io'
+  this.port = '5001'
+  this.blocks = new BlockAPI({
+    'host': 'ipfs.infura.io',
+    'port': '5001',
+    'protocol': 'https',
+    'user-agent': '/node-ipfs-api/14.3.7/',
+    'content-type': 'multipart/form-data; boundary=7ewtcwll2tk',
+    'api-path': '/api/v0/'
+  })
 }
 
 MetadataService.prototype.get = function (cid, cb) {
@@ -79,7 +86,7 @@ MetadataService.prototype.pathToCID = path => {
 }
 
 MetadataService.prototype.pathToURL = function (path) {
-  return `http://${this.host}:${this.port}/api/v0/dag/get?arg=` + path
+  return `https://${this.host}:${this.port}/api/v0/dag/get?arg=` + path
 }
 
 MetadataService.prototype.put = function (obj, cb) {

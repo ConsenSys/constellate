@@ -19,7 +19,7 @@ const {
   AudioObject,
   ImageObject,
   VideoObject
-} = require('js-coalaip/src/core')
+} = require('js-coalaip/lib/core')
 
 function ContentService({ name, path }) {
   if (name === 'ipfs') {
@@ -78,11 +78,12 @@ ContentService.prototype.process = function (files, cb) {
   const metadata = []
   let count = 0
   files.forEach((file, i) => {
+    // doesn't hash when minified
     this.service.hash(file.content, (err, hash) => {
       if (err) {
         return cb(err)
       }
-      this.hashes[file.name] = hash
+      // this.hashes[file.name] = hash
       const type = file.type.split('/')[0]
       if (type === 'audio') {
         metadata[i] = new AudioObject()
@@ -93,12 +94,21 @@ ContentService.prototype.process = function (files, cb) {
       } else {
         return cb(errUnexpectedType(type, 'audio|image|video'))
       }
-      metadata[i].setContentUrl(this.service.pathToURL(hash))
-      metadata[i].setEncodingFormat(file.type)
-      metadata[i].setName(file.name)
-      if (++count === files.length) {
-        cb(null, metadata)
-      }
+
+      this.service.put(file.content, (err, results) => {
+        if (err) {
+          return cb(err)
+        }
+
+        // metadata[i].setContentUrl(this.service.pathToURL(hash))
+        metadata[i].setContentUrl(this.service.pathToURL(results[0]))
+        this.hashes[file.name] = results[0]
+        metadata[i].setEncodingFormat(file.type)
+        metadata[i].setName(file.name)
+        if (++count === files.length) {
+          cb(null, metadata)
+        }
+      })
     })
   })
 }
@@ -141,6 +151,7 @@ ContentService.prototype.put = function (cb) {
     }
     for (let i = 0; i < this.files.length; i++) {
       file = this.files[i]
+      // TODO - DEBUG WHY THE HASHES CHANGE AFTER TRANSPILATION
       if (results[i] !== this.hashes[file.name]) {
         return cb(errUnexpectedHash(results[i], this.hashes[file.name]))
       }
