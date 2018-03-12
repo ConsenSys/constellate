@@ -1,11 +1,12 @@
 'use strict'
 
+const newArray = require('./util.js')
+
 // @flow
 
 /**
  * @module constellate/src/translate
  */
-
 const parseCSV = (csv: string, type: string): Object => {
    // adapted from https://gist.github.com/jonmaim/7b896cf5c8cfe932a3dd
    const data = {}

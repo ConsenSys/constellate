@@ -16,7 +16,6 @@ const {
 /**
  * @module constellate/src/constellate-browser
  */
-
 const readFilesAs = (files: File[], readAs: string, tasks: Object, t: number, i?: number) => {
   let count = 0
   const t1 = tasks.add((result, j) => {

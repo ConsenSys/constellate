@@ -47,16 +47,12 @@ const expanded = {
   publisher
 }
 
-const addr = // ...
-
+const addr = '/ip4/127.0.0.1/tcp/5001'
 const contentService = new Ipfs.ContentService(addr)
 const metadataService = new Ipfs.MetadataService(addr)
-
 const resolver = new Resolver(metadataService)
-
 const content1 = fs.readFileSync('proj1/track1.mp3')
 const content2 = fs.readFileSync('proj2/track2.mp3')
-
 const tasks = new Tasks()
 
 let cid, count = 0, hashes

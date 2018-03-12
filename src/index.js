@@ -33,7 +33,6 @@ const {
 /**
  * @module constellate/src/constellate
  */
-
 const ErrNoAccount = new Error('no account')
 const ErrNoCallback = new Error('no callback')
 const ErrNoDecryption = new Error('no decryption')

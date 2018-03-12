@@ -7,7 +7,6 @@ const fpcalc = require('fpcalc')
 /**
  * @module constellate/src/fingerprint.js
  */
-
 module.exports = function() {
   let encoded, raw
   this.calc = (filepath: string, tasks: Object, t: number, i?: number) => {
@@ -54,38 +53,8 @@ function hammingDistance(x1: number, x2: number): number {
   }, 0)
 }
 
-/*
-
-The following code is adapted from https://github.com/acoustid/chromaprint/
-
----------------------------------- LICENSE ----------------------------------
-
-MIT License
-
-Copyright (C) 2010-2016  Lukas Lalinsky
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-*/
-
+// The following code is adapted from https://github.com/acoustid/chromaprint/
 // from https://github.com/acoustid/chromaprint/blob/master/src/utils/base64.h
-
 function getBase64EncodedSize(size: number): number {
   return (size * 4 + 2) / 3
 }
@@ -179,7 +148,6 @@ function base64Decode(input: Buffer): Uint8Array {
 }
 
 // from https://github.com/acoustid/chromaprint/blob/master/src/fingerprint_compressor.cpp
-
 const kNormalBits = 3
 const kMaxNormalValue = (1 << kNormalBits) - 1
 
@@ -226,9 +194,7 @@ function compress(algorithm: number, input: Uint32Array): Uint8Array {
 }
 
 // from https://github.com/acoustid/chromaprint/blob/master/src/fingerprint_decompressor.cpp
-
 const kExceptionBits = 5
-
 function decompress(input: Uint8Array): Uint32Array {
   const size = input.length
   if (size < 4) {
@@ -286,7 +252,6 @@ function unpackBits(bits: Uint8Array, size: number): Uint32Array {
 }
 
 // from https://github.com/acoustid/chromaprint/blob/master/src/utils/pack_int3_array.h
-
 function getPackedInt3ArraySize(size: number): number {
   return (size * 3 + 7) / 8
 }
@@ -329,7 +294,6 @@ function packInt3Array(input: Uint8Array): Uint8Array {
 }
 
 // from https://github.com/acoustid/chromaprint/blob/master/src/utils/pack_int5_array.h
-
 function getPackedInt5ArraySize(size: number): number {
   return (size * 5 + 7) / 8
 }
@@ -376,7 +340,6 @@ function packInt5Array(input: Uint8Array): Uint8Array {
 }
 
 // from https://github.com/acoustid/chromaprint/blob/master/src/utils/unpack_int3_array.h
-
 function getUnpackedInt3ArraySize(size: number): number {
   return size * 8 / 3
 }
@@ -410,7 +373,6 @@ function unpackInt3Array(input: Uint8Array): Uint8Array {
 }
 
 // from https://github.com/acoustid/chromaprint/blob/master/src/utils/unpack_int5_array.h
-
 function getUnpackedInt5ArraySize(size: number): number {
   return size * 8 / 5
 }
@@ -449,7 +411,6 @@ function unpackInt5Array(input: Uint8Array): Uint8Array {
 }
 
 // from https://github.com/acoustid/chromaprint/blob/master/src/utils/gaussian_filter.h
-
 function ReflectIterator(size: number) {
   this.forward = true
   this.pos = 0
@@ -556,7 +517,6 @@ function gaussianFilter(input: Uint32Array, n: number, sigma: number): Uint32Arr
 }
 
 // from https://github.com/acoustid/chromaprint/blob/master/src/utils/gradient.h
-
 function gradient(input: Uint32Array, size: number): Uint32Array {
   const output = new Uint32Array(size)
   if (input.length <= 1) {
@@ -580,7 +540,6 @@ function gradient(input: Uint32Array, size: number): Uint32Array {
 }
 
 // from https://github.com/acoustid/chromaprint/blob/master/src/fingerprint_matcher.h
-
 function Segment(pos1: number, pos2: number, duration: number, score: number, leftScore?: number, rightScore?: number) {
   this.pos1 = pos1
   this.pos2 = pos2
@@ -600,11 +559,8 @@ function Segment(pos1: number, pos2: number, duration: number, score: number, le
 }
 
 // from https://github.com/acoustid/chromaprint/blob/master/src/fingerprint_matcher.cpp
-
 const ALIGN_BITS = 12
-
 const alignStrip = x => x >>> (32 - ALIGN_BITS)
-
 function match(matchThreshold: number, raw1: Uint32Array, raw2: Uint32Array): Object {
   const hashShift = 32 - ALIGN_BITS
   const hashMask = ((1 << ALIGN_BITS) - 1) << hashShift
